@@ -18,6 +18,7 @@ def main():
 
 	vms = Vms()
 	vms.fromCSV("data/vms.csv")
+	vms.sortByCPU()
 	
 
 	for vm in vms.vms:
@@ -26,7 +27,7 @@ def main():
 		err( vmhosts.dump() )
 		ret = vmhosts.addVm(vm,"mem")
 		if ret == False:
-			err("**************** error **************** ")
+			sys.stderr.write("### {0} error !\n".format(vm.name) )
 		else:
 			err( "put:",ret.name )
 	vmhosts.sortByName()
