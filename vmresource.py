@@ -22,7 +22,7 @@ def main():
 	vms.fromCSV(args.machine)
 	vms.sortByCPU()
 	
-
+	print "-----------------------------------------"
 	for vm in vms.vms:
 		err( "-" * 20 )
 		err( "add:" , vm.name )

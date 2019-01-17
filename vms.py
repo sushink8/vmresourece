@@ -18,11 +18,11 @@ class Vms:
 			return self
 	
 	def sortByCPU(self):
-		self.vms.sort(key=lambda x: x.numCPU * 10 if x.affinity else 1 ,reverse=True)
+		self.vms.sort(key=lambda x: x.numCPU * ( 10 if x.affinity() else 1 ) ,reverse=True)
 		return self
 	
 	def sortByMem(self):
-		self.vms.sort(key=lambda x: x.memMB * 10 if x.affinity else 1 ,reverse=True)
+		self.vms.sort(key=lambda x: x.memMB * ( 10 if x.affinity() else 1 ),reverse=True)
 		return self
 
 	def dump(self):
@@ -43,7 +43,7 @@ class Vm:
 		return self.vmhost != ""
 
 	def dump(self):
-		return "{0}:{1},{2},{3}\n".format(self.name,self.numCPU,self.memMB,self.os)
+		return "{0}:{1},{2},{3},{4}\n".format(self.name,self.numCPU,self.memMB,self.os,self.vmhost)
 	
 	def show(self,vmhostname):
 		return "{0},{1},{2},{3}\n".format(self.name,vmhostname,self.numCPU,self.memMB)
