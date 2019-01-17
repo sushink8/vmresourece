@@ -8,16 +8,18 @@ from vmhosts import *
 from constraints import *
 from vms import *
 from err import *
+import argparse
 
 def main():
+	args = option()
 	c = Constraints()
 	c.add("failoverhosts",Constraint(constraintFailoverhost()))
 	c.add("windowsLimit",Constraint(constraintWindowsLimit(2)))
 	vmhosts = VmHosts(c)
-	vmhosts.fromCSV("data/vmhosts.csv")
+	vmhosts.fromCSV(args.host)
 
 	vms = Vms()
-	vms.fromCSV("data/vms.csv")
+	vms.fromCSV(args.machine)
 	vms.sortByCPU()
 	
 
@@ -36,6 +38,10 @@ def main():
 	print vmhosts.showVms()
 	return
 
+def option():
+	parser = argparse.ArgumentParser(description="virtual machine resource palnning mini tool")
+	parser.add_argument("-m" , "--machine" , type=str , help="virtual machine csv file path" )
+	parser.add_argument("-H" , "--host" , type=str , help="host csv file path")
+	return parser.parse_args()
 
 main()
-
