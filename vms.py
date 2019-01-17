@@ -18,11 +18,11 @@ class Vms:
 			return self
 	
 	def sortByCPU(self):
-		self.vms.sort(key=lambda x: x.numCPU * ( 10 if x.affinity() else 1 ) ,reverse=True)
+		self.vms.sort(key=lambda x: x.numCPU * ( 100 if x.affinity() else 1 ) + ( x.memMB / ( 1024 * 1024 ) )   ,reverse=True)
 		return self
 	
 	def sortByMem(self):
-		self.vms.sort(key=lambda x: x.memMB * ( 10 if x.affinity() else 1 ),reverse=True)
+		self.vms.sort(key=lambda x: x.memMB * ( 100 if x.affinity() else 1 ) + ( x.numCPU ) , reverse=True)
 		return self
 
 	def dump(self):

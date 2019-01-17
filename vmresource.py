@@ -20,7 +20,8 @@ def main():
 
 	vms = Vms()
 	vms.fromCSV(args.machine)
-	vms.sortByCPU()
+	vms.sortByMem()
+	#print vms.dump()
 	
 	print "-----------------------------------------"
 	for vm in vms.vms:
