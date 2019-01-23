@@ -54,7 +54,7 @@ class VmHost:
 		return s
 	
 	def showVmHosts(self):
-		return "{0},{1}/{2},{3}/{4}\n".format(self.name, self.sumNumCPU() , self.numCPU , self.sumMemMB(), self.memMB )
+		return "{0},{1}/{2},{3}/{4},{5}/{2},{6}/{4}\n".format(self.name, self.sumNumCPU() , self.numCPU , self.sumMemMB(), self.memMB , self.numCPU - self.sumNumCPU() , self.memMB - self.sumMemMB() )
 
 	def showVms(self):
 		return "".join(map(lambda x: x.show(self.name) , self.vms) )
@@ -119,7 +119,9 @@ class VmHosts:
 
 		# check constraints / resource
 		for i,vmhost in enumerate(self.vmhosts):
-			if vmhost.constraints.violated(vmhost,vm) :
+			if vm.vmhost == "!" + vmhost.name:
+				continue
+			elif vmhost.constraints.violated(vmhost,vm) :
 				continue
 			else:
 				ret = vmhost.addVm(vm)
