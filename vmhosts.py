@@ -117,12 +117,15 @@ class VmHosts:
 			if vm.vmhost == vmhost.name:
 				return vmhost.addVm(vm)
 
-		# check constraints
+		# check constraints / resource
 		for i,vmhost in enumerate(self.vmhosts):
 			if vmhost.constraints.violated(vmhost,vm) :
 				continue
 			else:
-				return vmhost.addVm(vm)
+				ret = vmhost.addVm(vm)
+				if ret == False:
+					continue
+				return ret
 		return False
 
 	def dump(self):

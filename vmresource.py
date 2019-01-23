@@ -21,7 +21,7 @@ def main():
 	vms = Vms()
 	vms.fromCSV(args.machine)
 	vms.sortByMem()
-	#print vms.dump()
+	err( vms.dump() )
 	
 	print "-----------------------------------------"
 	for vm in vms.vms:
